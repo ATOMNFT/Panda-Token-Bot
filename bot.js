@@ -65,29 +65,37 @@ client.on('messageCreate', async (msg) => {
     }
   }
 
-  else if (command === '!price') {
-    try {
-      const res = await fetch(`https://api.dexscreener.com/latest/dex/pairs/abstract/0xdc087d63bc59ae8692f6cbb0f2d8a1828a97c819`);
-      const data = await res.json();
-      const price = data?.pair?.priceUsd;
+ else if (command === '!price') {
+   try {
+     const res = await fetch(`https://api.dexscreener.com/latest/dex/pairs/abs/${PANDA_TOKEN}`);
+     const data = await res.json();
+     const pair = data?.pair;
 
-      if (!price) {
-        return msg.reply("⚠️ Price data not available for Panda token.");
-      }
+     if (!pair || !pair.priceUsd) {
+       return msg.reply("⚠️ Price data not available for Panda token.");
+     }
 
-      const embed = new EmbedBuilder()
-        .setTitle(`📈 Panda Token Price`)
-        .addFields({ name: 'USD Price', value: `$${Number(price).toFixed(6)} USD`, inline: true })
-        .setColor(0x93C5FD)
-        .setFooter({ text: 'Powered by Dexscreener' });
+     const price = Number(pair.priceUsd).toFixed(6);
+     const change = parseFloat(pair.priceChange.h24).toFixed(2);
+     const direction = change >= 0 ? '📈 Up' : '📉 Down';
+     const changeColor = change >= 0 ? 0x10B981 : 0xEF4444;
 
-      msg.reply({ embeds: [embed] });
+     const embed = new EmbedBuilder()
+       .setTitle(`🐼 Panda Token Price`)
+       .addFields(
+         { name: 'USD Price', value: `$${price}`, inline: true },
+         { name: '24h Change', value: `${direction} ${change}%`, inline: true }
+       )
+       .setColor(changeColor)
+       .setFooter({ text: 'Powered by Dexscreener' });
 
-    } catch (err) {
-      console.error(err);
-      msg.reply("❌ Couldn't fetch the Panda token price.");
-    }
-  }
+     msg.reply({ embeds: [embed] });
+
+   } catch (err) {
+     console.error(err);
+     msg.reply("❌ Couldn't fetch the Panda token price.");
+   }
+ }
 });
 
 client.login(process.env.DISCORD_TOKEN);
