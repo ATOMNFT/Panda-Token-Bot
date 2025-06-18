@@ -1,0 +1,15 @@
+{
+  "name": "panda-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord bot for checking Panda token price and balance",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.3.1",
+    "ethers": "^6.7.0",
+    "node-fetch": "^3.3.2"
+  }
+}
