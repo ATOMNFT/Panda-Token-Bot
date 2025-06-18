@@ -32,7 +32,7 @@
 ## 🔗 Quick Links
 
 - 🌐 **Landing Page**  
-  👉 [Check it out](https://your-github-username.github.io/your-repo-name/)
+  👉 [Check it out](https://atomnft.github.io/Panda-Token-Bot/)
 
 - ➕ **Invite the Bot**  
   [Click to Invite](https://discord.com/oauth2/authorize?client_id=1384722356014153910&permissions=274878024704&scope=bot)
