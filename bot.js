@@ -65,37 +65,37 @@ client.on('messageCreate', async (msg) => {
     }
   }
 
- else if (command === '!price') {
-   try {
-     const res = await fetch(`https://api.dexscreener.com/latest/dex/pairs/abs/${PANDA_TOKEN}`);
-     const data = await res.json();
-     const pair = data?.pair;
+else if (command === '!price') {
+  try {
+    const res = await fetch(`https://api.dexscreener.com/latest/dex/pairs/abs/${PANDA_TOKEN}`);
+    const data = await res.json();
+    const pair = data?.pair;
 
-     if (!pair || !pair.priceUsd) {
-       return msg.reply("⚠️ Price data not available for Panda token.");
-     }
+    if (!pair || !pair.priceUsd) {
+      return msg.reply("⚠️ Price data not available for Panda token.");
+    }
 
-     const price = Number(pair.priceUsd).toFixed(6);
-     const change = parseFloat(pair.priceChange.h24.pct).toFixed(2);
-     const direction = change >= 0 ? '📈 Up' : '📉 Down';
-     const changeColor = change >= 0 ? 0x10B981 : 0xEF4444;
+    const price = Number(pair.priceUsd).toFixed(6);
+    const change = parseFloat(pair.priceChange.h24).toFixed(2);
+    const direction = change >= 0 ? '📈 Up' : '📉 Down';
+    const changeColor = change >= 0 ? 0x10B981 : 0xEF4444;
 
-     const embed = new EmbedBuilder()
-       .setTitle(`🐼 Panda Token Price`)
-       .addFields(
-         { name: 'USD Price', value: `$${price}`, inline: true },
-         { name: '24h Change', value: `${direction} ${change}%`, inline: true }
-       )
-       .setColor(changeColor)
-       .setFooter({ text: 'Powered by Dexscreener' });
+    const embed = new EmbedBuilder()
+      .setTitle(`🐼 Panda Token Price`)
+      .addFields(
+        { name: 'USD Price', value: `$${price}`, inline: true },
+        { name: '24h Change', value: `${direction} ${Math.abs(change)}%`, inline: true }
+      )
+      .setColor(changeColor)
+      .setFooter({ text: 'Powered by Dexscreener' });
 
-     msg.reply({ embeds: [embed] });
+    msg.reply({ embeds: [embed] });
 
-   } catch (err) {
-     console.error(err);
-     msg.reply("❌ Couldn't fetch the Panda token price.");
-   }
- }
+  } catch (err) {
+    console.error(err);
+    msg.reply("❌ Couldn't fetch the Panda token price.");
+  }
+}
 });
 
 client.login(process.env.DISCORD_TOKEN);
