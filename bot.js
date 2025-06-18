@@ -32,7 +32,7 @@ client.on('messageCreate', async (msg) => {
       return msg.reply("❌ That doesn't look like a valid wallet address.");
     }
     walletMap.set(msg.author.id, arg);
-    msg.reply(`✅ Wallet address saved: \\`${arg}\\``);
+    msg.reply(`✅ Wallet address saved: \`${arg}\``);
   }
 
   else if (command === '!balance') {
