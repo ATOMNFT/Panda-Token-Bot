@@ -68,7 +68,7 @@ client.on('messageCreate', async (msg) => {
 
   else if (command === '!price') {
     try {
-      const res = await fetch(`const res = await fetch(`https://api.dexscreener.com/latest/dex/pairs/abstract/${PANDA_PAIR}`);`);
+      const res = await fetch(`https://api.dexscreener.com/latest/dex/pairs/abstract/${PANDA_PAIR}`);
       const data = await res.json();
       const pair = data?.pair;
 
