@@ -8,7 +8,7 @@ const client = new Client({
 });
 
 const provider = new ethers.JsonRpcProvider(process.env.RPC_URL);
-const PANDA_TOKEN = process.env.PANDA_CONTRACT_ADDRESS;
+const PANDA_PAIR = process.env.PANDA_PAIR_ADDRESS;
 
 const ERC20_ABI = [
   "function balanceOf(address) view returns (uint256)",
@@ -67,7 +67,7 @@ client.on('messageCreate', async (msg) => {
 
 else if (command === '!price') {
   try {
-    const res = await fetch(`https://api.dexscreener.com/latest/dex/pairs/abstract/0xdc087d63bc59ae8692f6cbb0f2d8a1828a97c819`);
+    const res = await fetch(`https://api.dexscreener.com/latest/dex/pairs/abs/${PANDA_PAIR}`);
     const data = await res.json();
     const pair = data?.pair;
 
@@ -75,7 +75,7 @@ else if (command === '!price') {
       return msg.reply("⚠️ Price data not available for Panda token.");
     }
 
-    const price = Number(pair.priceUsd).toFixed(6);
+    const price = Number(pair.priceUsd).toFixed(7);
     const change = parseFloat(pair.priceChange.h24).toFixed(2);
     const direction = change >= 0 ? '📈 Up' : '📉 Down';
     const changeColor = change >= 0 ? 0x10B981 : 0xEF4444;
