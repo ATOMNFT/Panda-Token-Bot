@@ -76,7 +76,7 @@ client.on('messageCreate', async (msg) => {
      }
 
      const price = Number(pair.priceUsd).toFixed(6);
-     const change = parseFloat(pair.priceChange.h24).toFixed(2);
+     const change = parseFloat(pair.priceChange.h24.pct).toFixed(2);
      const direction = change >= 0 ? '📈 Up' : '📉 Down';
      const changeColor = change >= 0 ? 0x10B981 : 0xEF4444;
 
