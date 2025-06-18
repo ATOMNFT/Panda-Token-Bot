@@ -67,7 +67,7 @@ client.on('messageCreate', async (msg) => {
 
 else if (command === '!price') {
   try {
-    const res = await fetch(`https://api.dexscreener.com/latest/dex/pairs/abs/${PANDA_TOKEN}`);
+    const res = await fetch(`https://api.dexscreener.com/latest/dex/pairs/abstract/0xdc087d63bc59ae8692f6cbb0f2d8a1828a97c819`);
     const data = await res.json();
     const pair = data?.pair;
 
