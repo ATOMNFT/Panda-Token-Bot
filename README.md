@@ -1,3 +1,5 @@
+![Header](Images/mainheader.png)
+
 # 🐼 PandaToken Checker Bot
 
 > **Track your $PANDA balance. Get live prices. All inside Discord.**  
