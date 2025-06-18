@@ -50,12 +50,12 @@ client.on('messageCreate', async (msg) => {
       ]);
       const formatted = ethers.formatUnits(balance, decimals);
 
-      const embed = new EmbedBuilder()
-        .setTitle(`🐼 Panda Token Balance`)
-        .setDescription(`Wallet: \\`${userWallet}\\``)
-        .addFields({ name: 'Balance', value: `**${formatted} ${symbol}**`, inline: true })
-        .setColor(0x34D399)
-        .setFooter({ text: `Data from Abstract chain` });
+	  const embed = new EmbedBuilder()
+	  .setTitle(`🐼 Panda Token Balance`)
+	  .setDescription(`Wallet: \`${userWallet}\``)  // ✅ Correct
+	  .addFields({ name: 'Balance', value: `**${formatted} ${symbol}**`, inline: true })
+	  .setColor(0x34D399)
+	  .setFooter({ text: `Data from Abstract chain` });
 
       msg.reply({ embeds: [embed] });
 
